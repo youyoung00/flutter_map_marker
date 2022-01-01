@@ -9,11 +9,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isCheck = true;
-  List<Map<String, List>> topBtns = {
-    'Fly': [true],
-    'Shop': [],
-    'Eat': [],
-  };
+  List<String> topBtnName = [
+    'Fly',
+    'Shop',
+    'Eat',
+  ];
+
+  List<bool> topBtnState = [
+    true,
+    false,
+    false,
+  ];
 
   int index = 0;
 
@@ -34,92 +40,92 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: topBtns.keys
-                      .map<Widget>(
-                        (value) => OutlinedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<OutlinedBorder>(
-                                StadiumBorder()),
-                            side: MaterialStateProperty.all<BorderSide>(
-                              BorderSide(
-                                  width: 2,
-                                  color: topBtns[value] == true
-                                      ? Colors.white
-                                      : Colors.transparent),
-                            ),
+                  children: [
+                    OutlinedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            const StadiumBorder()),
+                        side: MaterialStateProperty.all<BorderSide>(
+                          BorderSide(
+                            width: 2,
+                            color: topBtnState[0]
+                                ? Colors.white
+                                : Colors.transparent,
                           ),
-                          child: Text(
-                            value,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () {
-                            // for(int i = 0; i < topBtns.length; i++){
-                            //   if(topBtns.keys.toList().indexOf(value) == 0);
-                            // }
-                            // topBtns.keys.toList().indexOf(value);
-
-                            // for (int i = 0; i < topBtns.length; i++)
-                            //   if (topBtns[i] == true) {
-                            //     topBtns[i] = false;
-                            //   } else {
-                            //     topBtns[i] = true;
-                            //   }
-                            topBtnCheker();
-                            setState(() {});
-                          },
                         ),
-                      )
-                      .toList()
-                  // [
-                  //   OutlinedButton(
-                  //     style: ButtonStyle(
-                  //       shape: MaterialStateProperty.all<OutlinedBorder>(
-                  //           const StadiumBorder()),
-                  //       side: MaterialStateProperty.all<BorderSide>(
-                  //         BorderSide(
-                  //           width: 2,
-                  //           color: isCheck ? Colors.white : Colors.transparent,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     child: const Text(
-                  //       'Out',
-                  //       style: TextStyle(color: Colors.white),
-                  //     ),
-                  //     onPressed: () {
-                  //       setState(() {
-                  //         isCheck = !isCheck;
-                  //       });
-                  //     },
-                  //   ),
-                  //   OutlinedButton(
-                  //     style: ButtonStyle(
-                  //       shape: MaterialStateProperty.all<OutlinedBorder>(
-                  //           const StadiumBorder()),
-                  //       side: MaterialStateProperty.all<BorderSide>(
-                  //           const BorderSide(color: Colors.white, width: 2)),
-                  //     ),
-                  //     onPressed: () {},
-                  //     child: const Text(
-                  //       'Shop',
-                  //       style: TextStyle(color: Colors.white),
-                  //     ),
-                  //   ),
-                  //   OutlinedButton(
-                  //     style: ButtonStyle(
-                  //       shape: MaterialStateProperty.all<OutlinedBorder>(
-                  //           const StadiumBorder()),
-                  //       side: MaterialStateProperty.all<BorderSide>(
-                  //           const BorderSide(color: Colors.white, width: 2)),
-                  //     ),
-                  //     onPressed: () {},
-                  //     child: const Text(
-                  //       'Eat',
-                  //       style: TextStyle(color: Colors.white),
-                  //     ),
-                  //   )
-                  // ],
-                  ),
+                      ),
+                      child: const Text(
+                        'Fly',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        if (topBtnState[0] == true) {
+                          return;
+                        } else {
+                          topBtnState[0] = true;
+                          topBtnState[1] = false;
+                          topBtnState[2] = false;
+                        }
+                        setState(() {});
+                      },
+                    ),
+                    OutlinedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            StadiumBorder()),
+                        side: MaterialStateProperty.all<BorderSide>(
+                          BorderSide(
+                            width: 2,
+                            color: topBtnState[1]
+                                ? Colors.white
+                                : Colors.transparent,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Shop',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        if (topBtnState[1] == true) {
+                          return;
+                        } else {
+                          topBtnState[1] = true;
+                          topBtnState[0] = false;
+                          topBtnState[2] = false;
+                        }
+                        setState(() {});
+                      },
+                    ),
+                    OutlinedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                            const StadiumBorder()),
+                        side: MaterialStateProperty.all<BorderSide>(
+                          BorderSide(
+                            width: 2,
+                            color: topBtnState[2]
+                                ? Colors.white
+                                : Colors.transparent,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Eat',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        if (topBtnState[2] == true) {
+                          return;
+                        } else {
+                          topBtnState[2] = true;
+                          topBtnState[0] = false;
+                          topBtnState[1] = false;
+                        }
+                        setState(() {});
+                      },
+                    ),
+                  ]),
             ),
           )
         ],
@@ -134,15 +140,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void topBtnCheker() {
-    if (topBtns['Fly'] == true) {
-      topBtns['Shop'] == false || topBtns['Eat'] == false;
-    } else if (topBtns['Shop'] == true) {
-      topBtns['Fly'] == false || topBtns['Eat'] == false;
-    } else if (topBtns['Eat'] == true) {
-      topBtns['Fly'] == false || topBtns['Shop'] == false;
+  bool topBtnCheker(int i) {
+    bool clickBtn = topBtnState[i];
+    print(topBtnState[i]);
+
+    if (topBtnState[i] == true) {
+      topBtnState[i] = false;
+      clickBtn = topBtnState[i];
     }
 
-    print(topBtns);
+    if (topBtnState[i] == false) {
+      topBtnState[i] = true;
+      clickBtn = topBtnState[i];
+    }
+
+    print(clickBtn);
+    return clickBtn;
   }
 }
