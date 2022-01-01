@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/ui/shop.dart';
+
+import 'eat.dart';
+import 'fly.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,12 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isCheck = true;
-  List<String> topBtnName = [
-    'Fly',
-    'Shop',
-    'Eat',
-  ];
+  final _pageController = PageController();
+
+  int pageIndex = 0;
 
   List<bool> topBtnState = [
     true,
@@ -21,23 +22,33 @@ class _HomePageState extends State<HomePage> {
     false,
   ];
 
-  int index = 0;
+  List<Widget> pages = [
+    Fly(),
+    Shop(),
+    Eat(),
+  ];
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(140, 70, 106, 1),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child: Image.asset(
-              'image/flamingo.png',
-              color: Colors.white,
+          backgroundColor: const Color.fromRGBO(140, 70, 106, 1),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: Image.asset(
+                'image/flamingo.png',
+                color: Colors.white,
+              ),
             ),
-          ),
-          Expanded(
-            child: Container(
+            Expanded(
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -59,20 +70,21 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
-                        if (topBtnState[0] == true) {
-                          return;
-                        } else {
-                          topBtnState[0] = true;
-                          topBtnState[1] = false;
-                          topBtnState[2] = false;
-                        }
-                        setState(() {});
+                        setState(() {
+                          if (topBtnState[0] == true) {
+                            return;
+                          } else {
+                            topBtnState[0] = true;
+                            topBtnState[1] = false;
+                            topBtnState[2] = false;
+                          }
+                        });
                       },
                     ),
                     OutlinedButton(
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
-                            StadiumBorder()),
+                            const StadiumBorder()),
                         side: MaterialStateProperty.all<BorderSide>(
                           BorderSide(
                             width: 2,
@@ -126,35 +138,18 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ]),
-            ),
-          )
-        ],
-      ),
+            )
+          ]),
       drawer: const Drawer(),
       body: SafeArea(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          color: const Color.fromRGBO(140, 70, 106, 1),
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: pages.length,
+          itemBuilder: (BuildContext buildContext, int i) {
+            return pages[i];
+          },
         ),
       ),
     );
-  }
-
-  bool topBtnCheker(int i) {
-    bool clickBtn = topBtnState[i];
-    print(topBtnState[i]);
-
-    if (topBtnState[i] == true) {
-      topBtnState[i] = false;
-      clickBtn = topBtnState[i];
-    }
-
-    if (topBtnState[i] == false) {
-      topBtnState[i] = true;
-      clickBtn = topBtnState[i];
-    }
-
-    print(clickBtn);
-    return clickBtn;
   }
 }
