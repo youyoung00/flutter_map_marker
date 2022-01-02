@@ -14,8 +14,6 @@ class FlyHome extends StatefulWidget {
 class _FlyHomeState extends State<FlyHome> {
   final _pageController = PageController();
 
-  int pageIndex = 0;
-
   List<bool> topBtnState = [
     true,
     false,
@@ -30,7 +28,6 @@ class _FlyHomeState extends State<FlyHome> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _pageController.dispose();
     super.dispose();
   }
