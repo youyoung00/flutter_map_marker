@@ -17,14 +17,15 @@ class _FlyListState extends State<FlyList> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 300,
-          decoration: BoxDecoration(
+          height: 500,
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(20),
               topLeft: Radius.circular(20),
             ),
           ),
+          child: ListView.builder(itemBuilder: ),
         );
       },
     );
