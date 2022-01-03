@@ -1,197 +1,99 @@
-import 'package:draggable_home/draggable_home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map_marker/ui/eat.dart';
-import 'package:flutter_map_marker/ui/fly/fly_list.dart';
-import 'package:flutter_map_marker/ui/shop.dart';
 
-class HomePage extends StatefulWidget {
+class BtmSheet extends StatefulWidget {
+  const BtmSheet({Key? key}) : super(key: key);
+
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<BtmSheet> createState() => _BtmSheetState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final _pageController = PageController();
-  List<bool> topBtnState = [
-    true,
-    false,
-    false,
-  ];
-
-  List<Widget> pages = [
-    const FlyList(),
-    const Shop(),
-    const Eat(),
-  ];
-
+class _BtmSheetState extends State<BtmSheet> {
   @override
   Widget build(BuildContext context) {
-    return DraggableHome(
-      // headerExpandedHeight: 0.35,
-      alwaysShowLeadingAndAction: true,
-      leading: const Icon(
-        Icons.menu,
-      ),
-      title: const Text(""),
-      headerWidget: headerWidget(context),
-      headerBottomBar: headerBottomBarWidget(),
-      body: [
-        listView(),
-      ],
-      fullyStretchable: true,
-      expandedBody: bodyView(),
-    );
-  }
+    Size size = MediaQuery.of(context).size;
+    int value = 1;
 
-  Container headerBottomBarWidget() {
-    return Container(
-        // child: Row(
-        //   mainAxisSize: MainAxisSize.max,
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   children: [
-        //     Icon(
-        //       Icons.settings,
-        //       color: Colors.white,
-        //     ),
-        //   ],
-        // ),
-        );
-  }
-
-  Widget headerWidget(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Image.asset(
-                    'image/flamingo.png',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              OutlinedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                      const StadiumBorder()),
-                  side: MaterialStateProperty.all<BorderSide>(
-                    BorderSide(
-                      width: 2,
-                      color: topBtnState[0] ? Colors.white : Colors.transparent,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Center(
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  value++;
+                });
+              },
+              child: Container(
+                  width: size.width * 0.8,
+                  height: size.height * 0.08,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: Colors.teal),
+                  child: Center(
+                    child: Text(
+                      'Show Bottom Sheet',
+                      style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
-                  ),
-                ),
-                child: const Text(
-                  'Fly',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  setState(() {
-                    if (topBtnState[0] == true) {
-                      return;
-                    } else {
-                      topBtnState[0] = true;
-                      topBtnState[1] = false;
-                      topBtnState[2] = false;
-                      _pageController.jumpToPage(0);
-                    }
-                  });
-                },
-              ),
-              OutlinedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                      const StadiumBorder()),
-                  side: MaterialStateProperty.all<BorderSide>(
-                    BorderSide(
-                      width: 2,
-                      color: topBtnState[1] ? Colors.white : Colors.transparent,
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  'Shop',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  if (topBtnState[1] == true) {
-                    return;
-                  } else {
-                    topBtnState[1] = true;
-                    topBtnState[0] = false;
-                    topBtnState[2] = false;
-                    _pageController.jumpToPage(1);
-                  }
-                  setState(() {});
-                },
-              ),
-              OutlinedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                      const StadiumBorder()),
-                  side: MaterialStateProperty.all<BorderSide>(
-                    BorderSide(
-                      width: 2,
-                      color: topBtnState[2] ? Colors.white : Colors.transparent,
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  'Eat',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  if (topBtnState[2] == true) {
-                    return;
-                  } else {
-                    topBtnState[2] = true;
-                    topBtnState[0] = false;
-                    topBtnState[1] = false;
-                    _pageController.jumpToPage(2);
-                  }
-                  setState(() {});
-                },
-              ),
-            ],
+                  )),
+            ),
           ),
-        ),
-      ],
-    );
-  }
-
-  ListView listView() {
-    return ListView.builder(
-      padding: EdgeInsets.only(top: 0),
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 20,
-      shrinkWrap: true,
-      itemBuilder: (context, index) => Card(
-        color: Colors.white70,
-        child: ListTile(
-          leading: CircleAvatar(
-            child: Text("$index"),
+          AnimatedContainer(
+            transform: Matrix4.translationValues(
+                0,
+                value == 0
+                    ? size.height
+                    : value == 1
+                        ? size.height * 0.8
+                        : value == 2
+                            ? size.height * 0.6
+                            : value == 3
+                                ? size.height * 0.4
+                                : value == 4
+                                    ? size.height * 0.2
+                                    : value == 5
+                                        ? 0
+                                        : size.height,
+                0),
+            duration: Duration(milliseconds: 500),
+            child: Container(
+              width: size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18), color: Colors.teal),
+              child: Column(
+                children: [
+                  SizedBox(height: 50),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (value > 5) {
+                          value = 0;
+                        }
+                        value++;
+                      });
+                    },
+                    child: Icon(
+                      Icons.arrow_upward_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 50),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        value--;
+                      });
+                    },
+                    child: Icon(
+                      Icons.arrow_downward_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          title: Text("Title"),
-          subtitle: Text("Subtitile"),
-        ),
+        ],
       ),
-    );
-  }
-
-  Widget bodyView() {
-    return PageView.builder(
-      controller: _pageController,
-      itemCount: pages.length,
-      itemBuilder: (BuildContext buildContext, int i) {
-        return pages[i];
-      },
     );
   }
 }

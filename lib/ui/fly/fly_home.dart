@@ -141,14 +141,13 @@ class _FlyHomeState extends State<FlyHome> {
         ],
       ),
       drawer: const Drawer(),
-      body: SafeArea(
-        child: PageView.builder(
-          controller: _pageController,
-          itemCount: pages.length,
-          itemBuilder: (BuildContext buildContext, int i) {
-            return pages[i];
-          },
-        ),
+      body: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _pageController,
+        itemCount: pages.length,
+        itemBuilder: (BuildContext buildContext, int i) {
+          return pages[i];
+        },
       ),
     );
   }
