@@ -4,6 +4,7 @@ import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 class Calendar extends StatelessWidget {
+  final String selectDates = 'Select Dates';
   final calendarController = CleanCalendarController(
     minDate: DateTime.now(),
     maxDate: DateTime.now().add(const Duration(days: 365)),
@@ -47,7 +48,7 @@ class Calendar extends StatelessWidget {
               Icons.arrow_back_rounded,
             ),
           ),
-          title: const Text('Scrollable Clean Calendar'),
+          title: Text(selectDates),
           actions: [
             IconButton(
               onPressed: () {

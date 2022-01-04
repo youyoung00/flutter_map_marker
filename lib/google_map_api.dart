@@ -1,52 +1,66 @@
 import 'dart:async';
+import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map_marker/location_service.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-void main() => runApp(MyApp());
+import 'location_service.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Google Maps Demo',
-      home: MapSample(),
-    );
-  }
-}
+// void main() => runApp(MyApp());
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Flutter Google Maps Demo',
+//       home: MapSample(),
+//     );
+//   }
+// }
 
 class MapSample extends StatefulWidget {
+  final String title;
+  final String subTitle;
+
+  const MapSample({Key? key, required this.title, required this.subTitle})
+      : super(key: key);
+
   @override
   State<MapSample> createState() => MapSampleState();
 }
 
 class MapSampleState extends State<MapSample> {
-  Completer<GoogleMapController> _controller = Completer();
-  TextEditingController _searchController = TextEditingController();
+  final Completer<GoogleMapController> _controller = Completer();
+  final TextEditingController _searchController = TextEditingController();
 
   Set<Marker> _markers = Set<Marker>();
   Set<Polygon> _polygons = Set<Polygon>();
   List<LatLng> polygonLatLngs = <LatLng>[];
 
   int _polygonIdCounter = 1;
+  double zoom = 14.4746;
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  late CameraPosition _kGooglePlex;
+
+  LatLng currentTarget = LatLng(37.42796133580664, -122.085749655962);
 
   @override
   void initState() {
+    _kGooglePlex = CameraPosition(
+      target: LatLng(37.42796133580664, -122.085749655962),
+      zoom: zoom,
+    );
     super.initState();
     _setMarker(LatLng(37.42796133580664, -122.085749655962));
+    _goToCity();
   }
 
   void _setMarker(LatLng point) {
     setState(() {
       _markers.add(
         Marker(
-          markerId: MarkerId('marker'),
+          markerId: const MarkerId('marker'),
           position: point,
         ),
       );
@@ -100,34 +114,109 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Google Maps'),
-      ),
       body: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  controller: _searchController,
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(hintText: 'Search by City'),
-                  onChanged: (value) {
-                    print(value);
-                  },
+          Container(
+            padding: const EdgeInsets.only(top: 32),
+            color: const Color.fromRGBO(140, 70, 106, 1),
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  widget.subTitle,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      color: Colors.white),
                 ),
-              ),
-              IconButton(
-                onPressed: () async {
-                  var place =
-                      await LocationService().getPlace(_searchController.text);
-                  _goToPlace(place);
-                },
-                icon: const Icon(
-                  Icons.search,
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Nonstop - 2h 12m*',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 4),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4)),
+                        width: 70,
+                        child: IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: () async {
+                            final googleMapController =
+                                await _controller.future;
+
+                            var currentZoomLevel =
+                                await googleMapController.getZoomLevel();
+
+                            if (currentZoomLevel > 20) {
+                              currentZoomLevel = currentZoomLevel - 8;
+                              // print('if 줌레벨 확인 : ${currentZoomLevel}');
+                            } else {
+                              currentZoomLevel = currentZoomLevel + 2;
+                              // print('else 줌레벨 확인 : ${currentZoomLevel}');
+                            }
+
+                            googleMapController.animateCamera(
+                              CameraUpdate.newCameraPosition(
+                                CameraPosition(
+                                  target: currentTarget,
+                                  zoom: currentZoomLevel,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 4),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4)),
+                        width: 70,
+                        child: IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: () async {
+                            final googleMapController =
+                                await _controller.future;
+
+                            var currentZoomLevel =
+                                await googleMapController.getZoomLevel();
+
+                            if (currentZoomLevel < 3.0) {
+                              currentZoomLevel = currentZoomLevel + 12;
+                              // print('if 줌레벨 확인 : ${currentZoomLevel}');
+                            } else {
+                              currentZoomLevel = currentZoomLevel - 2;
+                              // print('else 줌레벨 확인 : ${currentZoomLevel}');
+                            }
+
+                            googleMapController.animateCamera(
+                              CameraUpdate.newCameraPosition(
+                                CameraPosition(
+                                  target: currentTarget,
+                                  zoom: currentZoomLevel,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
           Expanded(
             child: GoogleMap(
@@ -147,6 +236,9 @@ class MapSampleState extends State<MapSample> {
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
+              onCameraMove: (cameraPosition) {
+                currentTarget = cameraPosition.target;
+              },
               onTap: (point) {
                 setState(() {
                   polygonLatLngs.add(point);
@@ -162,6 +254,11 @@ class MapSampleState extends State<MapSample> {
       //   icon: const Icon(Icons.directions_boat),
       // ),
     );
+  }
+
+  Future<void> _goToCity() async {
+    var place = await LocationService().getPlace(widget.title);
+    _goToPlace(place);
   }
 
   Future<void> _goToPlace(Map<String, dynamic> place) async {

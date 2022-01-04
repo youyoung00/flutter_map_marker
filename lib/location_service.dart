@@ -20,6 +20,7 @@ class LocationService {
     final placeId = await getPlaceId(input);
     final String url =
         'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$key';
+    // 'https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJzzlcLQGifDURm_JbQKHsEX4&key=AIzaSyCSdKtKIRtI8HfVqKLBpOq4-HFFqiLos0M';
     var response = await http.get(Uri.parse(url));
     var json = convert.jsonDecode(response.body);
     var results = json['result'] as Map<String, dynamic>;
