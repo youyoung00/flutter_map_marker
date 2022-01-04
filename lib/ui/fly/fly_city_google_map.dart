@@ -5,18 +5,18 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../api_connect/location_service.dart';
 
-class MapSample extends StatefulWidget {
+class CityMap extends StatefulWidget {
   final String cityName;
   final String cityInfo;
 
-  const MapSample({Key? key, required this.cityName, required this.cityInfo})
+  const CityMap({Key? key, required this.cityName, required this.cityInfo})
       : super(key: key);
 
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<CityMap> createState() => CityMapState();
 }
 
-class MapSampleState extends State<MapSample> {
+class CityMapState extends State<CityMap> {
   final Completer<GoogleMapController> _controller = Completer();
   final TextEditingController _searchController = TextEditingController();
 

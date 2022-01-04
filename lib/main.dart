@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           canvasColor: Colors.transparent),
-      home: FlyHome(),
+      home: const FlyHome(),
     );
   }
 }

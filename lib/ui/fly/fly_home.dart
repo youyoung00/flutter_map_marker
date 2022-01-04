@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/ui/shop/shop.dart';
 
 import '../eat/eat.dart';
-import 'fly_list.dart';
+import 'fly_menu.dart';
 
 class FlyHome extends StatefulWidget {
   const FlyHome({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _FlyHomeState extends State<FlyHome> {
   ];
 
   List<Widget> pages = [
-    const FlyList(),
+    const FlyMenu(),
     const Shop(),
     const Eat(),
   ];
