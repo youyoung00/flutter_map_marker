@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_map_marker/google_map_api.dart';
+import 'package:flutter_map_marker/model/fly_city_model.dart';
+import 'package:flutter_map_marker/ui/fly/fly_city_google_map.dart';
 
 import 'calendar.dart';
 
@@ -13,39 +12,6 @@ class FlyList extends StatefulWidget {
 }
 
 class _FlyListState extends State<FlyList> {
-  List<Map<String, String>> btmSheetItems = [
-    {
-      'CityImg':
-          'https://cdn.pixabay.com/photo/2020/11/24/02/13/gyeongbok-palace-5771324__340.jpg',
-      'Titles': 'Seoul',
-      'SubTitles': 'Seoul, Korea',
-    },
-    {
-      'CityImg':
-          'https://cdn.pixabay.com/photo/2017/06/24/00/54/milan-cathedral-2436458__340.jpg',
-      'Titles': ' Milan',
-      'SubTitles': 'Milan, Rome',
-    },
-    {
-      'CityImg':
-          'https://cdn.pixabay.com/photo/2015/05/01/15/13/new-york-748631__340.jpg',
-      'Titles': 'NewYork',
-      'SubTitles': 'NewYork, America',
-    },
-    {
-      'CityImg':
-          'https://cdn.pixabay.com/photo/2015/06/11/08/25/china-805587__340.jpg',
-      'Titles': 'Beijing',
-      'SubTitles': 'Beijing, China',
-    },
-    {
-      'CityImg':
-          'https://cdn.pixabay.com/photo/2019/04/20/11/39/japan-4141578__340.jpg',
-      'Titles': 'ToKyo',
-      'SubTitles': 'ToKyo, Japan',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     List<Widget> flyTile = [
@@ -154,7 +120,7 @@ class _FlyListState extends State<FlyList> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: btmSheetItems.length,
+                  itemCount: cityInfos.length,
                   itemBuilder: (BuildContext context, int i) {
                     return Column(
                       children: [
@@ -164,9 +130,8 @@ class _FlyListState extends State<FlyList> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MapSample(
-                                  title: btmSheetItems[i]['Titles'].toString(),
-                                  subTitle:
-                                      btmSheetItems[i]['SubTitles'].toString(),
+                                  cityName: cityInfos[i].cityName.toString(),
+                                  cityInfo: cityInfos[i].cityInfo.toString(),
                                 ),
                               ),
                             );
@@ -176,15 +141,15 @@ class _FlyListState extends State<FlyList> {
                               width: 80,
                               height: 80,
                               child: Image.network(
-                                btmSheetItems[i]['CityImg'].toString(),
+                                cityInfos[i].cityImg.toString(),
                                 fit: BoxFit.cover,
                               ),
                             ),
                             title: Text(
-                              btmSheetItems[i]['Titles'].toString(),
+                              cityInfos[i].cityName.toString(),
                             ),
                             subtitle: Text(
-                              btmSheetItems[i]['SubTitles'].toString(),
+                              cityInfos[i].cityInfo.toString(),
                             ),
                           ),
                         ),

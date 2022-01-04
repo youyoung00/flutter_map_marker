@@ -1,29 +1,15 @@
 import 'dart:async';
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'location_service.dart';
-
-// void main() => runApp(MyApp());
-//
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Google Maps Demo',
-//       home: MapSample(),
-//     );
-//   }
-// }
+import '../../api_connect/location_service.dart';
 
 class MapSample extends StatefulWidget {
-  final String title;
-  final String subTitle;
+  final String cityName;
+  final String cityInfo;
 
-  const MapSample({Key? key, required this.title, required this.subTitle})
+  const MapSample({Key? key, required this.cityName, required this.cityInfo})
       : super(key: key);
 
   @override
@@ -67,44 +53,6 @@ class MapSampleState extends State<MapSample> {
     });
   }
 
-  // static final Marker _kGooglePlexMarker = Marker(
-  //     markerId: MarkerId('kGooglePlex'),
-  //     infoWindow: InfoWindow(title: 'Google Plex'),
-  //     icon: BitmapDescriptor.defaultMarker,
-  //     position: LatLng(37.42796133580664, -122.085749655962));
-  //
-  // static final CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(37.43296265331129, -122.08832357078792),
-  //     tilt: 59.440717697143555,
-  //     zoom: 19.151926040649414);
-  //
-  // static final Marker _kLakeMarker = Marker(
-  //     markerId: MarkerId('_kLakePlex'),
-  //     infoWindow: InfoWindow(title: 'Lake'),
-  //     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-  //     position: LatLng(37.43296265331129, -122.08832357078792));
-  //
-  // static final Polyline _kPolyline = Polyline(
-  //     polylineId: PolylineId('_kPolyline'),
-  //     points: [
-  //       LatLng(37.42796133580664, -122.085749655962),
-  //       LatLng(37.43296265331129, -122.08832357078792),
-  //     ],
-  //     width: 5);
-  //
-  // static final Polygon _kPolygon = Polygon(
-  //   polygonId: PolygonId('_kPolygon'),
-  //   points: [
-  //     LatLng(37.43296265331129, -122.08832357078792),
-  //     LatLng(37.42796133580664, -122.085749655962),
-  //     LatLng(37.418, -122.092),
-  //     LatLng(37.435, -122.092),
-  //   ],
-  //   strokeWidth: 5,
-  //   fillColor: Colors.transparent,
-  // );
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -125,7 +73,7 @@ class MapSampleState extends State<MapSample> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  widget.subTitle,
+                  widget.cityInfo,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 28,
@@ -223,15 +171,6 @@ class MapSampleState extends State<MapSample> {
               mapType: MapType.normal,
               markers: _markers,
               polygons: _polygons,
-              // {_kGooglePlexMarker},
-              // _kLakeMarker,
-
-              // polylines: {
-              //   _kPolyline,
-              // },
-              // polygons: {
-              //   _kPolygon,
-              // },
               initialCameraPosition: _kGooglePlex,
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
@@ -248,16 +187,11 @@ class MapSampleState extends State<MapSample> {
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: _goToTheLake,
-      //   label: const Text('To the lake!'),
-      //   icon: const Icon(Icons.directions_boat),
-      // ),
     );
   }
 
   Future<void> _goToCity() async {
-    var place = await LocationService().getPlace(widget.title);
+    var place = await LocationService().getPlace(widget.cityName);
     _goToPlace(place);
   }
 
@@ -289,9 +223,4 @@ class MapSampleState extends State<MapSample> {
       ),
     );
   }
-
-// Future<void> _goToTheLake() async {
-//   final GoogleMapController controller = await _controller.future;
-//   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-// }
 }

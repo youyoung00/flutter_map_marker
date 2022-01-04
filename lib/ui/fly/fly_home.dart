@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map_marker/ui/shop.dart';
+import 'package:flutter_map_marker/ui/shop/shop.dart';
 
-import '../eat.dart';
+import '../eat/eat.dart';
 import 'fly_list.dart';
 
 class FlyHome extends StatefulWidget {
