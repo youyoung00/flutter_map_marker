@@ -21,7 +21,7 @@ class _FlyHomeState extends State<FlyHome> {
   ];
 
   List<Widget> pages = [
-    const FlyMenu(),
+    FlyMenu(),
     const Shop(),
     const Eat(),
   ];
