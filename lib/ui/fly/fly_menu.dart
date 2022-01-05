@@ -125,6 +125,9 @@ class _FlyMenuState extends State<FlyMenu> {
                     children: [
                       InkWell(
                         onTap: () {
+                          setState(() {
+                            selectedCity = cityInfos[i].cityInfo.toString();
+                          });
                           Navigator.push(
                             context,
                             MaterialPageRoute(
