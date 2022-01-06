@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum SheetState { invisible, basic, full }
+enum SheetState { basic, invisible, full }
 
 class FlyBtmSheetController extends ChangeNotifier {
   SheetState sheetState = SheetState.basic;

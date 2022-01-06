@@ -17,10 +17,28 @@ class _FlyMenuState extends State<FlyMenu> {
   final controller = FlyBtmSheetController();
 
   void _onVerticalGesture(DragUpdateDetails details) {
-    if (details.primaryDelta! < -0.1) {
+    // print('제스쳐 시도함=====================${details.primaryDelta}');
+
+    // Down 제스쳐의 처리
+    if (details.primaryDelta! > 5 && details.primaryDelta! < 25) {
+      if (controller.sheetState == SheetState.basic) {
+        controller.changeSheetState(SheetState.invisible);
+      } else if (controller.sheetState == SheetState.full) {
+        controller.changeSheetState(SheetState.basic);
+      }
+    } else if (details.primaryDelta! >= 35) {
       controller.changeSheetState(SheetState.invisible);
-    } else if (details.primaryDelta! > 12) {
-      controller.changeSheetState(SheetState.basic);
+    }
+
+    // UP 제스쳐의 처리
+    if (details.primaryDelta! < -5 && details.primaryDelta! > -25) {
+      if (controller.sheetState == SheetState.invisible) {
+        controller.changeSheetState(SheetState.basic);
+      } else if (controller.sheetState == SheetState.basic) {
+        controller.changeSheetState(SheetState.full);
+      }
+    } else if (details.primaryDelta! <= -35) {
+      controller.changeSheetState(SheetState.full);
     }
   }
 
@@ -62,24 +80,16 @@ class _FlyMenuState extends State<FlyMenu> {
           ),
         ),
       ),
-      GestureDetector(
-        onTap: () {
+      FlyListTile(
+        iconData: Icons.calendar_today_rounded,
+        title: "Jun 10 - jun 20",
+        ontap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Calendar()),
           );
         },
-        child: const ListTile(
-          leading: Icon(
-            Icons.calendar_today_rounded,
-            color: Colors.white,
-          ),
-          title: Text(
-            "Jun 10 - jun 20",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      )
+      ),
     ];
 
     return Scaffold(
@@ -112,7 +122,9 @@ class _FlyMenuState extends State<FlyMenu> {
                         duration: panelTransition,
                         top: controller.sheetState == SheetState.basic
                             ? topListHeight
-                            : (constraints.maxHeight - headerHeight),
+                            : controller.sheetState == SheetState.full
+                                ? topAppBarBtnHeight
+                                : constraints.maxHeight - headerHeight,
                         left: 0,
                         right: 0,
                         height: constraints.maxHeight,
@@ -205,6 +217,13 @@ class _FlyMenuState extends State<FlyMenu> {
       ),
     );
   }
+
+  // SheetState sheetStateBasic(SheetState basic){
+  //   if( controller.sheetState == SheetState.basic){
+  //       : controller.sheetState == SheetState.full
+  //   ? topAppBarBtnHeight
+  //       : constraints.maxHeight - headerHeight,
+  //   }
 
   Widget _showBottomSheet() {
     return Expanded(
@@ -348,4 +367,48 @@ class _FlyMenuState extends State<FlyMenu> {
 //     },
 //   );
 // }
+}
+
+class FlyListTile extends StatelessWidget {
+  final iconData;
+  final title;
+  final Function ontap;
+
+  const FlyListTile({
+    required this.iconData,
+    required this.title,
+    required this.ontap,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.symmetric(
+          vertical: 4,
+          horizontal: 14,
+        ),
+        color: const Color.fromRGBO(211, 108, 176, 1),
+        child: GestureDetector(
+          // onTap: () {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => Calendar()),
+          //   );
+          // },
+          onTap: () => ontap,
+          child: ListTile(
+            leading: Icon(
+              // Icons.calendar_today_rounded,
+              iconData,
+              color: Colors.white,
+            ),
+            title: Text(
+              // "Jun 10 - jun 20",
+              title,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ));
+  }
 }

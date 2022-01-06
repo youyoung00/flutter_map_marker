@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const topListHeight = 280.0;
+const topAppBarBtnHeight = 56.0;
 // const cartBarHeight = 100.0;
 const cityInfoTileHeight = 80.0;
 const headerHeight = 36.0;
