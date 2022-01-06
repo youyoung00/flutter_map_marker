@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/constants.dart';
 import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.dart';
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
@@ -23,7 +24,7 @@ class Calendar extends StatelessWidget {
       title: 'Scrollable Clean Calendar',
       theme: ThemeData(
         colorScheme: const ColorScheme(
-          primary: Color.fromRGBO(140, 70, 106, 1),
+          primary: themeColor,
           primaryVariant: Color(0xFF002984),
           secondary: Color(0xFFD32F2F),
           secondaryVariant: Color(0xFF9A0007),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/constants.dart';
 import 'package:flutter_map_marker/ui/shop/shop.dart';
 
 import '../eat/eat.dart';
@@ -21,7 +22,7 @@ class _FlyHomeState extends State<FlyHome> {
   ];
 
   List<Widget> pages = [
-    FlyMenu(),
+    const FlyMenu(),
     const Shop(),
     const Eat(),
   ];
@@ -37,7 +38,7 @@ class _FlyHomeState extends State<FlyHome> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color.fromRGBO(140, 70, 106, 1),
+        backgroundColor: themeColor,
         actions: [
           Padding(
             padding: const EdgeInsets.only(left: 30),
