@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/ui/fly/fly_calendar.dart';
 import 'package:flutter_map_marker/ui/fly/fly_home.dart';
 
 void main() {
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           canvasColor: Colors.transparent),
+      routes: {
+        '/calendar': (context) => Calendar(),
+      },
       home: const FlyHome(),
     );
   }

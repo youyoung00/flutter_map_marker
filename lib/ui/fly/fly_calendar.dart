@@ -14,8 +14,8 @@ class Calendar extends StatelessWidget {
     onPreviousMinDateTapped: (date) {},
     onAfterMaxDateTapped: (date) {},
     weekdayStart: DateTime.monday,
-    // initialDateSelected: DateTime(2022, 2, 3),
-    // endDateSelected: DateTime(2022, 2, 3),
+    initialDateSelected: DateTime(2022, 2, 3),
+    endDateSelected: DateTime(2022, 2, 3),
   );
 
   @override
@@ -49,7 +49,7 @@ class Calendar extends StatelessWidget {
               Icons.arrow_back_rounded,
             ),
           ),
-          title: Text(selectDates),
+          title: Text(''),
           actions: [
             IconButton(
               onPressed: () {
