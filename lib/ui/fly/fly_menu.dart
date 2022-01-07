@@ -17,7 +17,7 @@ class FlyMenu extends StatefulWidget {
 
 class _FlyMenuState extends State<FlyMenu> {
   final controller = FlyBtmSheetController();
-  String selectedCity = 'Seoul, South Korea';
+  // String selectedCity = '';
 
   void _onVerticalGesture(DragUpdateDetails details) {
     // Down 제스쳐의 처리
@@ -77,7 +77,9 @@ class _FlyMenuState extends State<FlyMenu> {
                     flyMenuDatas
                         .map<Widget>((e) => GestureDetector(
                               child: FlyListTile(
-                                title: e.contentsTitle,
+                                title: e.iconData == Icons.room_rounded
+                                    ? e.contentsTitle = selectedCity
+                                    : e.contentsTitle,
                                 iconData: e.iconData,
                               ),
                               onTap: () {
@@ -130,6 +132,7 @@ class _FlyMenuState extends State<FlyMenu> {
                                         fontSize: 17),
                                   ),
                                 ),
+                                const Divider(),
                                 Expanded(
                                   child: ListView.builder(
                                     shrinkWrap: true,
@@ -139,12 +142,11 @@ class _FlyMenuState extends State<FlyMenu> {
                                         children: [
                                           InkWell(
                                             onTap: () {
+                                              selectedCity = cityInfos[i]
+                                                  .cityInfo
+                                                  .toString();
                                               setState(
-                                                () {
-                                                  selectedCity = cityInfos[i]
-                                                      .cityInfo
-                                                      .toString();
-                                                },
+                                                () {},
                                               );
                                               Navigator.push(
                                                 context,

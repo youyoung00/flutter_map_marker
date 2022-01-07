@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 
-class FlyListTile extends StatelessWidget {
+class FlyListTile extends StatefulWidget {
   final IconData iconData;
   final String title;
   final Function? ontap;
@@ -15,6 +15,11 @@ class FlyListTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<FlyListTile> createState() => _FlyListTileState();
+}
+
+class _FlyListTileState extends State<FlyListTile> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -24,11 +29,11 @@ class FlyListTile extends StatelessWidget {
       color: secondColor,
       child: ListTile(
         leading: Icon(
-          iconData,
+          widget.iconData,
           color: Colors.white,
         ),
         title: Text(
-          title,
+          widget.title,
           style: const TextStyle(color: textColor),
         ),
       ),

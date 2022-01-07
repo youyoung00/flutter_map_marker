@@ -10,13 +10,15 @@ class FlyMenuModel {
   });
 }
 
+String selectedCity = 'City, Country';
+
 List<FlyMenuModel> flyMenuDatas = [
   FlyMenuModel(
     contentsTitle: '1 Adult, Economy',
     iconData: Icons.person_rounded,
   ),
   FlyMenuModel(
-    contentsTitle: 'City, Country',
+    contentsTitle: selectedCity,
     iconData: Icons.room_rounded,
   ),
   FlyMenuModel(
