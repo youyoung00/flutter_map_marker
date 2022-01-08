@@ -5,6 +5,7 @@ import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 class Calendar extends StatelessWidget {
+  static String routeName = '/calendar';
   final String selectDates = 'Select Dates';
   final calendarController = CleanCalendarController(
     minDate: DateTime.now(),

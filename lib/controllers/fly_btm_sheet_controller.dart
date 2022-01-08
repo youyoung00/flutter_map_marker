@@ -7,6 +7,7 @@ class FlyBtmSheetController extends ChangeNotifier {
 
   void changeSheetState(SheetState state) {
     sheetState = state;
+
     notifyListeners();
   }
 }

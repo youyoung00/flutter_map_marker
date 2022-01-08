@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/components/config/tile_menu_data.dart';
 import 'package:flutter_map_marker/controllers/fly_btm_sheet_controller.dart';
-import 'package:flutter_map_marker/model/fly_city_model.dart';
-import 'package:flutter_map_marker/model/fly_menu_model.dart';
-import 'package:flutter_map_marker/ui/fly/fly_calendar.dart';
+import 'package:flutter_map_marker/model/fly_city_Info_model.dart';
 
+import '../../components/widgets/tile_menu_widget.dart';
 import '../../constants.dart';
 import 'fly_city_google_map.dart';
-import 'fly_tile_widget.dart';
 
 class FlyMenu extends StatefulWidget {
   const FlyMenu({Key? key}) : super(key: key);
@@ -17,7 +16,6 @@ class FlyMenu extends StatefulWidget {
 
 class _FlyMenuState extends State<FlyMenu> {
   final controller = FlyBtmSheetController();
-  // String selectedCity = '';
 
   void _onVerticalGesture(DragUpdateDetails details) {
     // Down 제스쳐의 처리
@@ -52,47 +50,15 @@ class _FlyMenuState extends State<FlyMenu> {
             width: MediaQuery.of(context).size.width,
             color: themeColor,
             child: Column(
-                children:
-                    // FlyListTile(
-                    //   iconData: flyMenuDatas[1].iconData,
-                    //   title: flyMenuDatas[1].contentsTitle,
-                    //   ontap: () {},
-                    // ),
-                    // FlyListTile(
-                    //   iconData: flyMenuDatas[2].iconData,
-                    //   title: flyMenuDatas[2].contentsTitle,
-                    //   ontap: () {},
-                    // ),
-                    // FlyListTile(
-                    //   iconData: flyMenuDatas[3].iconData,
-                    //   title: flyMenuDatas[3].contentsTitle,
-                    //   ontap: () {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(builder: (context) => Calendar()),
-                    //     );
-                    //   },
-                    // )
-
-                    flyMenuDatas
-                        .map<Widget>((e) => GestureDetector(
-                              child: FlyListTile(
-                                title: e.iconData == Icons.room_rounded
-                                    ? e.contentsTitle = selectedCity
-                                    : e.contentsTitle,
-                                iconData: e.iconData,
-                              ),
-                              onTap: () {
-                                if (e.iconData ==
-                                    Icons.calendar_today_rounded) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Calendar()));
-                                }
-                              },
-                            ))
-                        .toList()),
+                children: flyMenuDatas
+                    .map<Widget>(
+                      (e) => TileMenu(
+                        iconData: e.menuIconData,
+                        route: e.routeName,
+                        tourInfo: e.info,
+                      ),
+                    )
+                    .toList()),
           ),
           AnimatedBuilder(
             animation: controller,
@@ -142,23 +108,21 @@ class _FlyMenuState extends State<FlyMenu> {
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              selectedCity = cityInfos[i]
-                                                  .cityInfo
-                                                  .toString();
-                                              setState(
-                                                () {},
-                                              );
-                                              Navigator.push(
+                                              // selectedCity = cityInfos[i]
+                                              //     .cityInfo
+                                              //     .toString();
+                                              // setState(
+                                              //   () {},
+                                              // );
+                                              Navigator.pushNamed(
                                                 context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => CityMap(
-                                                    cityInfo: cityInfos[i]
-                                                        .cityInfo
-                                                        .toString(),
-                                                    cityName: cityInfos[i]
-                                                        .cityName
-                                                        .toString(),
-                                                  ),
+                                                CityMap.routeName,
+                                                arguments: FlyCityInfoModel(
+                                                  cityInfo:
+                                                      cityInfos[i].cityInfo,
+                                                  cityName:
+                                                      cityInfos[i].cityName,
+                                                  cityImg: cityInfos[i].cityImg,
                                                 ),
                                               );
                                             },

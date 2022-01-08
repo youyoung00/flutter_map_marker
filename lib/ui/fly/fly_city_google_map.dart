@@ -8,9 +8,13 @@ import '../../api_connect/location_service.dart';
 class CityMap extends StatefulWidget {
   final String cityName;
   final String cityInfo;
+  static const routeName = '/cityMap';
 
-  const CityMap({Key? key, required this.cityName, required this.cityInfo})
-      : super(key: key);
+  const CityMap({
+    Key? key,
+    required this.cityName,
+    required this.cityInfo,
+  }) : super(key: key);
 
   @override
   State<CityMap> createState() => CityMapState();
