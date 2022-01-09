@@ -19,6 +19,8 @@ class Calendar extends StatelessWidget {
     endDateSelected: DateTime(2022, 2, 3),
   );
 
+  Calendar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

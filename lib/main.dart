@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/ui/fly/fly_calendar.dart';
 import 'package:flutter_map_marker/ui/fly/fly_city_google_map.dart';
-import 'package:flutter_map_marker/ui/fly/fly_home.dart';
+import 'package:flutter_map_marker/ui/main_home/home.dart';
 
 import 'model/fly_city_Info_model.dart';
 
@@ -15,11 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const FlyHome(),
+      home: const Home(),
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           canvasColor: Colors.transparent),
-      routes: {Calendar.routeName: (context) => Calendar()},
+      routes: {
+        Calendar.routeName: (context) => Calendar(),
+      },
       onGenerateRoute: (settings) {
         if (settings.name == CityMap.routeName) {
           final args = settings.arguments as FlyCityInfoModel;

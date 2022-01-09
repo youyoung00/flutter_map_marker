@@ -10,7 +10,7 @@ class FlyCityInfoModel {
   });
 }
 
-List<FlyCityInfoModel> cityInfos = [
+List<FlyCityInfoModel> cityInfoList = [
   FlyCityInfoModel(
     cityName: 'Seoul',
     cityImg:

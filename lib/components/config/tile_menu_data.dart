@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/model/user_tour_info_model.dart';
 import 'package:flutter_map_marker/ui/fly/fly_calendar.dart';
-import 'package:flutter_map_marker/ui/fly/fly_city_google_map.dart';
 
 class MenuIconData {
   final IconData menuIconData;
   final String routeName;
   final String info;
 
-  MenuIconData(
+  const MenuIconData(
       {required this.routeName,
       required this.menuIconData,
       required this.info});
@@ -15,22 +15,22 @@ class MenuIconData {
 
 List<MenuIconData> flyMenuDatas = [
   MenuIconData(
-    info: '1 Adult, Economy',
+    info: UserTourInfoModel.tInfo,
     routeName: '',
     menuIconData: Icons.person_rounded,
   ),
   MenuIconData(
-    info: 'City, Country',
+    info: UserTourInfoModel.tCityCountry,
     routeName: '',
     menuIconData: Icons.room_rounded,
   ),
   MenuIconData(
-    info: 'Choose Destination',
-    routeName: CityMap.routeName,
+    info: UserTourInfoModel.destination,
+    routeName: '',
     menuIconData: Icons.flight_rounded,
   ),
   MenuIconData(
-    info: 'DepartureDate, ArrivalDate',
+    info: UserTourInfoModel.depArrDate,
     routeName: Calendar.routeName,
     menuIconData: Icons.calendar_today_rounded,
   ),

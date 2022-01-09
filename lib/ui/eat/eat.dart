@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Eat extends StatelessWidget {
+  // static String routeName = '/eat';
   const Eat({Key? key}) : super(key: key);
 
   @override

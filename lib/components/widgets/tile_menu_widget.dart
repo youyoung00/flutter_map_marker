@@ -20,6 +20,12 @@ class TileMenu extends StatefulWidget {
 
 class _TileMenuState extends State<TileMenu> {
   @override
+  void initState() {
+    print(widget.tourInfo);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -36,10 +42,7 @@ class _TileMenuState extends State<TileMenu> {
           }
         },
         child: ListTile(
-          leading: Icon(
-            widget.iconData,
-            color: Colors.white,
-          ),
+          leading: Icon(widget.iconData, color: textColor),
           title: Text(
             widget.tourInfo,
             style: const TextStyle(color: textColor),
@@ -49,42 +52,3 @@ class _TileMenuState extends State<TileMenu> {
     );
   }
 }
-
-// class FlyListTile extends StatelessWidget {
-//   final IconData iconData;
-//   final String title;
-//   final Function? ontap;
-//
-//   const FlyListTile({
-//     required this.iconData,
-//     required this.title,
-//     this.ontap,
-//     Key? key,
-//   }) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: const EdgeInsets.symmetric(
-//         vertical: 4,
-//         horizontal: 14,
-//       ),
-//       color: secondColor,
-//       child: GestureDetector(
-//         onTap: () {
-//           Navigator.of(context).pushNamed('/calendar');
-//         },
-//         child: ListTile(
-//           leading: Icon(
-//             iconData,
-//             color: Colors.white,
-//           ),
-//           title: Text(
-//             title,
-//             style: const TextStyle(color: textColor),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

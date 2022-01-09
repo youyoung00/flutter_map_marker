@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/constants.dart';
 
 class AppBarBtn extends StatefulWidget {
-  final List<bool> topBtnState;
-  final List<Widget> pages;
+  final bool topBtnState;
+  final String btnName;
+  final int currentIndex;
+  final VoidCallback onPress;
 
-  AppBarBtn({
+  const AppBarBtn({
+    required this.btnName,
     required this.topBtnState,
-    required this.pages,
+    required this.currentIndex,
+    required this.onPress,
     Key? key,
   }) : super(key: key);
 
@@ -15,50 +20,29 @@ class AppBarBtn extends StatefulWidget {
 }
 
 class _AppBarBtnState extends State<AppBarBtn> {
-  final pageController = PageController();
-
   @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
-        side: MaterialStateProperty.all<BorderSide>(
-          BorderSide(
-            width: 2,
-            color: topBtnState[0] ? Colors.white : Colors.transparent,
+        style: ButtonStyle(
+          shape:
+              MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+          side: MaterialStateProperty.all<BorderSide>(
+            BorderSide(
+                width: 2,
+                color: widget.topBtnState == true
+                    ? textColor
+                    : Colors.transparent),
           ),
         ),
-      ),
-      child: const Text(
-        'Fly',
-        style: TextStyle(color: Colors.white),
-      ),
-      onPressed: () {
-        setState(() {
-          topBtnState();
-        });
-      },
-    );
-  }
-
-  List topBtnState(List btnStates, int currentIndex) {
-    List result = [];
-
-    if (topBtnState[0] == true) {
-      return result;
-    } else {
-      topBtnState[0] = true;
-      topBtnState[1] = false;
-      topBtnState[2] = false;
-      pageController.jumpToPage(0);
-    }
-
-    return result;
+        child: Text(
+          widget.btnName,
+          style: const TextStyle(color: textColor),
+        ),
+        onPressed: widget.onPress);
   }
 }
