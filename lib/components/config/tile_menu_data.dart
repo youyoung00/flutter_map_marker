@@ -5,9 +5,9 @@ import 'package:flutter_map_marker/ui/fly/fly_calendar.dart';
 class MenuIconData {
   final IconData menuIconData;
   final String routeName;
-  final String info;
+  String info;
 
-  const MenuIconData(
+  MenuIconData(
       {required this.routeName,
       required this.menuIconData,
       required this.info});
@@ -15,22 +15,22 @@ class MenuIconData {
 
 List<MenuIconData> flyMenuDatas = [
   MenuIconData(
-    info: UserTourInfoModel.tInfo,
+    info: tInfo,
     routeName: '',
     menuIconData: Icons.person_rounded,
   ),
   MenuIconData(
-    info: UserTourInfoModel.tCityCountry,
+    info: tCityCountry,
     routeName: '',
     menuIconData: Icons.room_rounded,
   ),
   MenuIconData(
-    info: UserTourInfoModel.destination,
+    info: destination,
     routeName: '',
     menuIconData: Icons.flight_rounded,
   ),
   MenuIconData(
-    info: UserTourInfoModel.depArrDate,
+    info: depArrDate,
     routeName: Calendar.routeName,
     menuIconData: Icons.calendar_today_rounded,
   ),

@@ -6,8 +6,10 @@ class TileMenu extends StatefulWidget {
   final IconData iconData;
   final String tourInfo;
   final String route;
+  final VoidCallback voidCallback;
 
   const TileMenu({
+    required this.voidCallback,
     required this.iconData,
     required this.tourInfo,
     required this.route,
@@ -20,12 +22,6 @@ class TileMenu extends StatefulWidget {
 
 class _TileMenuState extends State<TileMenu> {
   @override
-  void initState() {
-    print(widget.tourInfo);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -34,13 +30,7 @@ class _TileMenuState extends State<TileMenu> {
       ),
       color: secondColor,
       child: GestureDetector(
-        onTap: () {
-          if (widget.route == '') {
-            return;
-          } else {
-            Navigator.pushNamed(context, widget.route);
-          }
-        },
+        onTap: widget.voidCallback,
         child: ListTile(
           leading: Icon(widget.iconData, color: textColor),
           title: Text(

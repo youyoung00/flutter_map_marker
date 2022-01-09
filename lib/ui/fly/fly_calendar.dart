@@ -4,25 +4,63 @@ import 'package:scrollable_clean_calendar/controllers/clean_calendar_controller.
 import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
-class Calendar extends StatelessWidget {
+class Calendar extends StatefulWidget {
   static String routeName = '/calendar';
-  final String selectDates = 'Select Dates';
+
+  const Calendar({Key? key}) : super(key: key);
+
+  @override
+  State<Calendar> createState() => _CalendarState();
+}
+
+class _CalendarState extends State<Calendar> {
+  String initDay = '';
+  String endDay = '';
+
+  num startYear = 0;
+  int startMonth = 0;
+  int startDay = 0;
+  DateTime test = DateTime.now();
+  DateTime test2 = DateTime.now();
+  // DateTime initDays = DateTime(startYear, startMonth, startDay);
+
   final calendarController = CleanCalendarController(
     minDate: DateTime.now(),
     maxDate: DateTime.now().add(const Duration(days: 365)),
-    onRangeSelected: (firstDate, secondDate) {},
+    onRangeSelected: (test, test2) {
+      List result = [];
+      // print(test);
+      // print(test2);
+      result.add(test);
+      result.add(test2);
+
+      return result;
+    },
     onDayTapped: (date) {},
-    onPreviousMinDateTapped: (date) {},
+    onPreviousMinDateTapped: (test) {
+      print(test);
+    },
     onAfterMaxDateTapped: (date) {},
     weekdayStart: DateTime.monday,
-    initialDateSelected: DateTime(2022, 2, 3),
-    endDateSelected: DateTime(2022, 2, 3),
+    initialDateSelected: DateTime(2022, 2, 2),
+    endDateSelected: DateTime(2022, 2, 22),
   );
 
-  Calendar({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    initDay =
+        calendarController.initialDateSelected.toString().substring(0, 10);
+    endDay = calendarController.endDateSelected.toString().substring(0, 10);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    // selectedDates()
+
+    List selDates = calendarController.onRangeSelected?.call(test, test2);
+    // calendarController.o
+
     return MaterialApp(
       title: 'Scrollable Clean Calendar',
       theme: ThemeData(
@@ -52,7 +90,7 @@ class Calendar extends StatelessWidget {
               Icons.arrow_back_rounded,
             ),
           ),
-          title: Text(''),
+          title: Text("$selDates"),
           actions: [
             IconButton(
               onPressed: () {

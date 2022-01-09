@@ -4,6 +4,7 @@ import 'package:flutter_map_marker/components/widgets/tile_menu_widget.dart';
 import 'package:flutter_map_marker/constants.dart';
 import 'package:flutter_map_marker/controllers/fly_btm_sheet_controller.dart';
 import 'package:flutter_map_marker/model/fly_city_Info_model.dart';
+import 'package:flutter_map_marker/model/user_tour_info_model.dart';
 
 import 'fly_city_google_map.dart';
 
@@ -16,6 +17,8 @@ class Fly extends StatefulWidget {
 
 class _FlyState extends State<Fly> {
   final controller = FlyBtmSheetController();
+
+  String selectedCityCountry = tCityCountry;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,16 @@ class _FlyState extends State<Fly> {
                     (e) => TileMenu(
                       iconData: e.menuIconData,
                       route: e.routeName,
-                      tourInfo: e.info,
+                      tourInfo: e.menuIconData == Icons.room_rounded
+                          ? selectedCityCountry
+                          : e.info,
+                      voidCallback: () {
+                        if (e.routeName == '') {
+                          return;
+                        } else {
+                          Navigator.pushNamed(context, e.routeName);
+                        }
+                      },
                     ),
                   )
                   .toList()),
@@ -84,7 +96,11 @@ class _FlyState extends State<Fly> {
                                       children: [
                                         InkWell(
                                           onTap: () {
-                                            // UserTourInfoModel,
+                                            setState(() {
+                                              selectedCityCountry =
+                                                  cityInfoList[i].cityInfo;
+                                            });
+
                                             Navigator.pushNamed(
                                               context,
                                               CityMap.routeName,
