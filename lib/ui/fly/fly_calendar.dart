@@ -14,53 +14,43 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  String initDay = '';
-  String endDay = '';
-
-  num startYear = 0;
-  int startMonth = 0;
-  int startDay = 0;
+  String title = '';
   DateTime test = DateTime.now();
   DateTime test2 = DateTime.now();
-  // DateTime initDays = DateTime(startYear, startMonth, startDay);
 
-  final calendarController = CleanCalendarController(
-    minDate: DateTime.now(),
-    maxDate: DateTime.now().add(const Duration(days: 365)),
-    onRangeSelected: (test, test2) {
-      List result = [];
-      // print(test);
-      // print(test2);
-      result.add(test);
-      result.add(test2);
+  late final calendarController;
 
-      return result;
-    },
-    onDayTapped: (date) {},
-    onPreviousMinDateTapped: (test) {
-      print(test);
-    },
-    onAfterMaxDateTapped: (date) {},
-    weekdayStart: DateTime.monday,
-    initialDateSelected: DateTime(2022, 2, 2),
-    endDateSelected: DateTime(2022, 2, 22),
-  );
+  void setTitle(DateTime date1, [DateTime? date2]) {
+    setState(() {
+      if (date2 != null) {
+        title = '${date1.month}/${date1.day} - $date2';
+      } else {
+        title = '$date1';
+      }
+    });
+  }
 
   @override
   void initState() {
-    initDay =
-        calendarController.initialDateSelected.toString().substring(0, 10);
-    endDay = calendarController.endDateSelected.toString().substring(0, 10);
+    calendarController = CleanCalendarController(
+      minDate: DateTime.now(),
+      maxDate: DateTime.now().add(const Duration(days: 365)),
+      onRangeSelected: (test, test2) => setTitle(test, test2),
+      onDayTapped: (date) {},
+      onPreviousMinDateTapped: (test) {},
+      onAfterMaxDateTapped: (test) {},
+      weekdayStart: DateTime.monday,
+      initialDateSelected: DateTime(2022, 1, 20),
+      endDateSelected: DateTime(2022, 2, 22),
+    );
+    // initDay =
+    //     calendarController.initialDateSelected.toString().substring(0, 10);
+    // endDay = calendarController.endDateSelected.toString().substring(0, 10);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // selectedDates()
-
-    List selDates = calendarController.onRangeSelected?.call(test, test2);
-    // calendarController.o
-
     return MaterialApp(
       title: 'Scrollable Clean Calendar',
       theme: ThemeData(
@@ -90,7 +80,7 @@ class _CalendarState extends State<Calendar> {
               Icons.arrow_back_rounded,
             ),
           ),
-          title: Text("$selDates"),
+          title: Text(title),
           actions: [
             IconButton(
               onPressed: () {

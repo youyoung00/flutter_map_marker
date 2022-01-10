@@ -41,7 +41,8 @@ class _FlyState extends State<Fly> {
                         if (e.routeName == '') {
                           return;
                         } else {
-                          Navigator.pushNamed(context, e.routeName);
+                          Navigator.pushNamed(context, e.routeName,
+                              arguments: {'cityName': 'seoul'});
                         }
                       },
                     ),
