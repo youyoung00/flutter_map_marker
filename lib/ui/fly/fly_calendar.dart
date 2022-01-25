@@ -14,7 +14,7 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  String title = '';
+  String title = 'Select Date';
   DateTime test = DateTime.now();
   DateTime test2 = DateTime.now();
 
@@ -23,9 +23,11 @@ class _CalendarState extends State<Calendar> {
   void setTitle(DateTime date1, [DateTime? date2]) {
     setState(() {
       if (date2 != null) {
-        title = '${date1.month}/${date1.day} - $date2';
+        String date1ToString = date1.toString().substring(10, 23);
+        String date2ToString = date2.toString().substring(10, 23);
+        title = '${date1.month}/${date1.day}  -  ${date2.month}/${date2.day}';
       } else {
-        title = '$date1';
+        title = '${date1.month}/${date1.day}';
       }
     });
   }
@@ -40,8 +42,8 @@ class _CalendarState extends State<Calendar> {
       onPreviousMinDateTapped: (test) {},
       onAfterMaxDateTapped: (test) {},
       weekdayStart: DateTime.monday,
-      initialDateSelected: DateTime(2022, 1, 20),
-      endDateSelected: DateTime(2022, 2, 22),
+      initialDateSelected: DateTime.now(),
+      endDateSelected: DateTime.now(),
     );
     // initDay =
     //     calendarController.initialDateSelected.toString().substring(0, 10);
@@ -72,6 +74,7 @@ class _CalendarState extends State<Calendar> {
       ),
       home: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -80,7 +83,12 @@ class _CalendarState extends State<Calendar> {
               Icons.arrow_back_rounded,
             ),
           ),
-          title: Text(title),
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 20,
+            ),
+          ),
           actions: [
             IconButton(
               onPressed: () {

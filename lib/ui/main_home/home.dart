@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/components/config/appbar_btn_data.dart';
-import 'package:flutter_map_marker/components/widgets/appbar_btn_widget.dart';
+import 'package:flutter_map_marker/ui/widgets/appbar_btn_widget.dart';
 
 import '../../constants.dart';
 

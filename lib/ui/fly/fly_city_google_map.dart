@@ -24,8 +24,8 @@ class CityMapState extends State<CityMap> {
   final Completer<GoogleMapController> _controller = Completer();
   final TextEditingController _searchController = TextEditingController();
 
-  Set<Marker> _markers = Set<Marker>();
-  Set<Polygon> _polygons = Set<Polygon>();
+  final Set<Marker> _markers = <Marker>{};
+  final Set<Polygon> _polygons = <Polygon>{};
   List<LatLng> polygonLatLngs = <LatLng>[];
 
   int _polygonIdCounter = 1;
@@ -33,16 +33,16 @@ class CityMapState extends State<CityMap> {
 
   late CameraPosition _kGooglePlex;
 
-  LatLng currentTarget = LatLng(37.42796133580664, -122.085749655962);
+  LatLng currentTarget = const LatLng(37.42796133580664, -122.085749655962);
 
   @override
   void initState() {
     _kGooglePlex = CameraPosition(
-      target: LatLng(37.42796133580664, -122.085749655962),
+      target: const LatLng(37.42796133580664, -122.085749655962),
       zoom: zoom,
     );
     super.initState();
-    _setMarker(LatLng(37.42796133580664, -122.085749655962));
+    _setMarker(const LatLng(37.42796133580664, -122.085749655962));
     _goToCity();
   }
 
