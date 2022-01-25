@@ -23,8 +23,6 @@ class _CalendarState extends State<Calendar> {
   void setTitle(DateTime date1, [DateTime? date2]) {
     setState(() {
       if (date2 != null) {
-        String date1ToString = date1.toString().substring(10, 23);
-        String date2ToString = date2.toString().substring(10, 23);
         title = '${date1.month}/${date1.day}  -  ${date2.month}/${date2.day}';
       } else {
         title = '${date1.month}/${date1.day}';
@@ -45,9 +43,6 @@ class _CalendarState extends State<Calendar> {
       initialDateSelected: DateTime.now(),
       endDateSelected: DateTime.now(),
     );
-    // initDay =
-    //     calendarController.initialDateSelected.toString().substring(0, 10);
-    // endDay = calendarController.endDateSelected.toString().substring(0, 10);
     super.initState();
   }
 
