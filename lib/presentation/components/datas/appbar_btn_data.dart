@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../eat_screen.dart';
 import '../../fly_screen.dart';
-import '../../shop_screen.dart';
+import '../../sleep_screen.dart';
 
 class AppBarBtnData {
   final String btnName;
@@ -25,7 +25,7 @@ class AppBarBtnData {
     ),
     AppBarBtnData(
       btnName: 'Sleep',
-      page: const ShopScreen(),
+      page: const SleepScreen(),
       btnState: false,
     ),
     AppBarBtnData(

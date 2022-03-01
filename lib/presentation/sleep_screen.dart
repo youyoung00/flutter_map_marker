@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ShopScreen extends StatelessWidget {
+class SleepScreen extends StatelessWidget {
   // static String routeName = '/sleep';
-  const ShopScreen({Key? key}) : super(key: key);
+  const SleepScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

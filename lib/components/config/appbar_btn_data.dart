@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/ui/eat/eat.dart';
 import 'package:flutter_map_marker/ui/fly/fly.dart';
-import 'package:flutter_map_marker/ui/shop/shop.dart';
+import 'package:flutter_map_marker/ui/shop/sleep.dart';
 
 class AppBarBtnData {
   final String btnName;
@@ -22,8 +22,8 @@ List<AppBarBtnData> appBarBtnDatas = [
     btnState: true,
   ),
   AppBarBtnData(
-    btnName: 'Shop',
-    page: const Shop(),
+    btnName: 'Sleep',
+    page: const Sleep(),
     btnState: false,
   ),
   AppBarBtnData(
