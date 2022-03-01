@@ -20,12 +20,12 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: themeColor,
+        leading: const Icon(Icons.menu_rounded),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(left: 30),
+            padding: const EdgeInsets.only(left: 50),
             child: Image.asset(
-              'image/flamingo.png',
-              color: Colors.white,
+              'image/crane.png',
             ),
           ),
           Expanded(
@@ -50,6 +50,7 @@ class _HomeState extends State<Home> {
       ),
       drawer: const Drawer(),
       body: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         itemCount: appBarBtnDatas.length,
         itemBuilder: (BuildContext context, int index) {
