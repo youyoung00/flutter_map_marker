@@ -8,7 +8,9 @@ class SleepScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          width: MediaQuery.of(context).size.width, color: Colors.green),
+        width: MediaQuery.of(context).size.width,
+        color: Colors.green,
+      ),
     );
   }
 }

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-
-import '../../constants.dart';
+import 'package:flutter_map_marker/constants.dart';
 
 class TileMenu extends StatefulWidget {
   final IconData iconData;
   final String tourInfo;
-  final String route;
+  // final String route;
   final VoidCallback voidCallback;
 
   const TileMenu({
     required this.voidCallback,
     required this.iconData,
     required this.tourInfo,
-    required this.route,
+    // required this.route,
     Key? key,
   }) : super(key: key);
 

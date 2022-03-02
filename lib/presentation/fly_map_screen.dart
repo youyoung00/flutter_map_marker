@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_map_marker/api_connect/location_service.dart';
+import 'package:flutter_map_marker/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../api_connect/location_service.dart';
 
 class FlyMapScreen extends StatefulWidget {
   final String cityName;
   final String cityInfo;
-  static const routeName = '/flyMapScreen';
 
   const FlyMapScreen({
     Key? key,
@@ -72,7 +71,7 @@ class FlyMapScreenState extends State<FlyMapScreen> {
         children: [
           Container(
             padding: const EdgeInsets.only(top: 32),
-            color: const Color.fromRGBO(140, 70, 106, 1),
+            color: themeColor,
             height: 200,
             width: MediaQuery.of(context).size.width,
             child: Column(

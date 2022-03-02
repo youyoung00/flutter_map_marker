@@ -5,7 +5,7 @@ import 'package:scrollable_clean_calendar/scrollable_clean_calendar.dart';
 import 'package:scrollable_clean_calendar/utils/enums.dart';
 
 class FlyCalendarScreen extends StatefulWidget {
-  static String routeName = '/calendar';
+  // static String routeName = '/calendar';
 
   const FlyCalendarScreen({Key? key}) : super(key: key);
 
