@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/presentation/home.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FlutterNativeSplash.removeAfter(initialization);
   runApp(const MyApp());
+}
+
+Future initialization(BuildContext? context) async {
+  await Future.delayed(
+    const Duration(seconds: 3),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,12 +20,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        canvasColor: Colors.transparent,
-      ),
-      home: const Home(),
+    return const MaterialApp(
+      home: Home(),
       // ChangeNotifierProvider<HomeViewModel>(
       //   create: (BuildContext context) =>
       //       HomeViewModel(context.watch<GetSelectedBtn>()),

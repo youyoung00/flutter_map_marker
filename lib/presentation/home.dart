@@ -18,6 +18,11 @@ class _HomeState extends State<Home> {
   final _pageController = PageController();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _pageController.dispose();
     super.dispose();

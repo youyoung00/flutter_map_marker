@@ -44,6 +44,16 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.0.5
+
+  # Run commends to generate splash screen
+  # 1) flutter clean
+  # 2) flutter pub get
+  # 3) flutter pub run flutter_native_splash:create
+flutter_native_splash:
+#  color: "#5d1049"
+  background_image: image/back_image.png
+  image: image/splash.png
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

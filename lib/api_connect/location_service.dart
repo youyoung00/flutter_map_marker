@@ -1,13 +1,12 @@
 import 'dart:convert' as convert;
 
+import 'package:flutter_map_marker/core/urls/urls.dart';
 import 'package:http/http.dart' as http;
 
 class LocationService {
-  final String key = 'AIzaSyCSdKtKIRtI8HfVqKLBpOq4-HFFqiLos0M';
-
   Future<String> getPlaceId(String input) async {
     final String url =
-        'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=$input&inputtype=textquery&key=$key';
+        '${Urls.baseUrl}findplacefromtext/json?input=$input&inputtype=textquery&key=${Keys.mapKey}';
 
     var response = await http.get(Uri.parse(url));
     var json = convert.jsonDecode(response.body);
@@ -19,7 +18,7 @@ class LocationService {
   Future<Map<String, dynamic>> getPlace(String input) async {
     final placeId = await getPlaceId(input);
     final String url =
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$key';
+        '${Urls.baseUrl}details/json?place_id=$placeId&key=${Keys.mapKey}';
 
     var response = await http.get(Uri.parse(url));
     var json = convert.jsonDecode(response.body);
