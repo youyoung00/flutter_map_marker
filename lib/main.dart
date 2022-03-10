@@ -22,11 +22,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: Home(),
-      // ChangeNotifierProvider<HomeViewModel>(
-      //   create: (BuildContext context) =>
-      //       HomeViewModel(context.watch<GetSelectedBtn>()),
-      //   child: const Home(),
-      // ),
     );
   }
 }

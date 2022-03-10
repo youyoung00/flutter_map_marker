@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/constants.dart';
-import 'package:flutter_map_marker/presentation/fly_calendar_screen.dart';
-import 'package:flutter_map_marker/presentation/fly_map_screen.dart';
+import 'package:flutter_map_marker/presentation/screens/fly_calendar_screen.dart';
+import 'package:flutter_map_marker/presentation/screens/fly_map_screen.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class FlyScreen extends StatefulWidget {
@@ -13,7 +13,6 @@ class FlyScreen extends StatefulWidget {
 
 class _FlyScreenState extends State<FlyScreen> {
   PanelController panelController = PanelController();
-  // late String selectedCityCountry;
 
   List<IconData> menuIcons = [
     Icons.person_rounded,
@@ -174,30 +173,6 @@ class _FlyScreenState extends State<FlyScreen> {
             },
           ),
         ),
-
-        // Column(
-        //   children: flyMenuDatas
-        //       .map<Widget>(
-        //         (e) => TileMenu(
-        //           iconData: e.menuIconData,
-        //           tourInfo: e.menuIconData == Icons.room_rounded
-        //               ? selectedCityCountry
-        //               : e.info,
-        //           voidCallback: () {
-        //             // Navigator.push(
-        //             //   context,
-        //             //   MaterialPageRoute(
-        //             //     builder: (context) => FlyMapScreen(
-        //             //       cityName: '',
-        //             //       cityInfo: '',
-        //             //     ),
-        //             //   ),
-        //             // );
-        //           },
-        //         ),
-        //       )
-        //       .toList(),
-        // ),
       ),
     );
   }

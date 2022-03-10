@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/constants.dart';
-import 'package:flutter_map_marker/presentation/eat_screen.dart';
-import 'package:flutter_map_marker/presentation/fly_screen.dart';
-import 'package:flutter_map_marker/presentation/sleep_screen.dart';
+import 'package:flutter_map_marker/presentation/screens/eat_screen.dart';
+import 'package:flutter_map_marker/presentation/screens/fly_screen.dart';
+import 'package:flutter_map_marker/presentation/screens/sleep_screen.dart';
 
 import 'components/appbar_btn_widget.dart';
 
@@ -96,105 +96,13 @@ class _HomeState extends State<Home> {
                       ),
                     )
                     .toList(),
-                // OutlinedButton(
-                //   style: ButtonStyle(
-                //     shape: MaterialStateProperty.all<OutlinedBorder>(
-                //       const StadiumBorder(),
-                //     ),
-                //     side: MaterialStateProperty.all<BorderSide>(
-                //       BorderSide(
-                //         width: 2,
-                //         color: appBarBtnDatas[0]['btnState']
-                //             ? textColor
-                //             : Colors.transparent,
-                //       ),
-                //     ),
-                //   ),
-                //   child: Text(
-                //     appBarBtnDatas[0]['btnName'],
-                //     style: const TextStyle(color: textColor),
-                //   ),
-                //   onPressed: () {
-                //     setState(() {
-                //       _pageController.jumpToPage(0);
-                //       appBarBtnDatas[0]['btnState'] =
-                //           !appBarBtnDatas[0]['btnState'];
-                //     });
-                //   },
-                // ),
-                // OutlinedButton(
-                //   style: ButtonStyle(
-                //     shape: MaterialStateProperty.all<OutlinedBorder>(
-                //       const StadiumBorder(),
-                //     ),
-                //     side: MaterialStateProperty.all<BorderSide>(
-                //       BorderSide(
-                //         width: 2,
-                //         color: appBarBtnDatas[1]['btnState']
-                //             ? textColor
-                //             : Colors.transparent,
-                //       ),
-                //     ),
-                //   ),
-                //   child: Text(
-                //     appBarBtnDatas[1]['btnName'],
-                //     style: const TextStyle(color: textColor),
-                //   ),
-                //   onPressed: () {
-                //     setState(() {
-                //       _pageController.jumpToPage(1);
-                //       appBarBtnDatas[1]['btnState'] =
-                //           !appBarBtnDatas[1]['btnState'];
-                //     });
-                //   },
-                // ),
-                // OutlinedButton(
-                //   style: ButtonStyle(
-                //     shape: MaterialStateProperty.all<OutlinedBorder>(
-                //       const StadiumBorder(),
-                //     ),
-                //     side: MaterialStateProperty.all<BorderSide>(
-                //       BorderSide(
-                //         width: 2,
-                //         color: appBarBtnDatas[2]['btnState']
-                //             ? textColor
-                //             : Colors.transparent,
-                //       ),
-                //     ),
-                //   ),
-                //   child: Text(
-                //     appBarBtnDatas[2]['btnName'],
-                //     style: const TextStyle(color: textColor),
-                //   ),
-                //   onPressed: () {
-                //     setState(() {
-                //       _pageController.jumpToPage(2);
-                //       appBarBtnDatas[2]['btnState'] =
-                //           !appBarBtnDatas[2]['btnState'];
-                //     });
-                //   },
-                // ),
               ],
-              // btnList
-              //     .map<Widget>(
-              //       (e) => AppBarBtn(
-              //         currentIndex: btnList.indexOf(e),
-              //         onPress: () {
-              //           viewModel.selectedBtn(btnList.indexOf(e));
-              //           _pageController.jumpToPage(
-              //             btnList.indexOf(e),
-              //           );
-              //         },
-              //         topBtnState: e.btnState,
-              //         btnName: e.btnName,
-              //       ),
-              //     )
-              //     .toList(),
             ),
           )
         ],
       ),
       body: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         itemCount: appBarBtnDatas.length,
         // btnList.length,
