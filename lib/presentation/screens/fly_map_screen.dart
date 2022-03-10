@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map_marker/constants.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../core/api_connect/location_service.dart';
+import '../../data/api_connect.dart';
 
 class FlyMapScreen extends StatefulWidget {
   final String cityName;

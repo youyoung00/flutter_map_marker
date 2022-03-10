@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SleepScreen extends StatelessWidget {
-  // static String routeName = '/sleep';
   const SleepScreen({Key? key}) : super(key: key);
 
   @override
